@@ -2,6 +2,7 @@
 
 ![image](web.webp)
 
+http://cards.itousouta15.tw/
 一個用純 HTML / CSS / JavaScript 製作的名片展示頁
 
 ## 檔案結構
