@@ -1,7 +1,7 @@
 :root{
   --bg-0: #0b0e12;
   --bg-1: #14181d;
-  --gold: #e8b96a;
+  --gold: #98cbff;
   --gold-dim: rgba(232,185,106,.35);
   --err: #c0524a;
   --radius-card: 16px;
@@ -160,4 +160,61 @@ html, body{
 @keyframes floatStage{
   0%, 100%{ transform: translateY(0); }
   50%{ transform: translateY(-6px); }
+}
+
+/* ── Deck switcher tabs ── */
+.deck-tabs{
+  position: fixed;
+  bottom: max(24px, env(safe-area-inset-bottom, 0px) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  background: rgba(20,24,29,.75);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  padding: 4px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.08);
+  /* keep above card shadow */
+  box-shadow: 0 4px 24px rgba(0,0,0,.5);
+}
+
+.deck-tab{
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,.42);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 0 22px;
+  height: 40px;
+  min-width: 80px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background .22s var(--ease), color .22s var(--ease);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.deck-tab.is-active{
+  background: var(--gold);
+  color: #0b0e12;
+}
+.deck-tab:hover:not(.is-active){
+  color: rgba(255,255,255,.72);
+}
+.deck-tab:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.deck-tab:disabled{
+  opacity: .4;
+  cursor: default;
 }
