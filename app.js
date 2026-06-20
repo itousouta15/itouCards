@@ -205,8 +205,12 @@ stage.addEventListener("pointermove", (e) => {
   tiltTarget.x = -(py - 0.5) * MAX_TILT_DEG * 2;
   stage.classList.add("is-glaring");
 
-  faceFront.style.setProperty("--mx", `${px * 100}%`);
-  faceFront.style.setProperty("--my", `${py * 100}%`);
+  const mx = `${px * 100}%`;
+  const my = `${py * 100}%`;
+  faceFront.style.setProperty("--mx", mx);
+  faceFront.style.setProperty("--my", my);
+  faceBack.style.setProperty("--mx", mx);
+  faceBack.style.setProperty("--my", my);
 });
 
 stage.addEventListener("pointerleave", () => {
