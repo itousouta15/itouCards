@@ -79,6 +79,12 @@ html, body{
   transform-style: preserve-3d;
   transition: transform .65s var(--ease), width .2s var(--ease);
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
 }
 .card-flip.is-flipped{ transform: rotateY(180deg); }
 .card-flip:focus-visible{ outline: 2px solid var(--gold); outline-offset: 6px; border-radius: var(--radius-card); }
@@ -95,6 +101,9 @@ html, body{
   box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.05);
   background: var(--bg-1);
   transition: box-shadow .25s var(--ease);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 .card-face img{
   width:100%;
