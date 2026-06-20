@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>itouCards</title>
+<meta name="description" content="itouCard" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="noise" aria-hidden="true"></div>
+
+<main class="stage" id="stage">
+  <div class="pedestal" aria-hidden="true"></div>
+
+  <div class="card-rig" id="cardRig">
+    <div
+      class="card-flip"
+      id="cardFlip"
+      tabindex="0"
+      role="button"
+    >
+      <div class="card-face card-face--front" id="faceFront">
+        <span class="sheen" aria-hidden="true"></span>
+      </div>
+      <div class="card-face card-face--back" id="faceBack" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div id="srStatus" class="sr-only" role="status" aria-live="polite"></div>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
