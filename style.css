@@ -88,6 +88,10 @@ html, body{
   border-radius: var(--radius-card);
   overflow:hidden;
   backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  -moz-backface-visibility:hidden;
+  transform: translateZ(0);
+  will-change: transform;
   box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.05);
   background: var(--bg-1);
   transition: box-shadow .25s var(--ease);
@@ -103,7 +107,7 @@ html, body{
 }
 
 .card-face--back{
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(0.1px);
 }
 
 .card-face--back.is-placeholder{
