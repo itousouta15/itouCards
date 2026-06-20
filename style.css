@@ -178,8 +178,27 @@ html, body{
   padding: 4px;
   border-radius: 100px;
   border: 1px solid rgba(255,255,255,.08);
-  /* keep above card shadow */
   box-shadow: 0 4px 24px rgba(0,0,0,.5);
+  animation: navEnter .5s .2s var(--ease) both;
+}
+
+/* Sliding active pill — position driven by JS via --pill-x / --pill-w */
+.deck-tabs::before{
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: var(--pill-x, 4px);
+  width: var(--pill-w, 80px);
+  height: calc(100% - 8px);
+  border-radius: 100px;
+  background: var(--gold);
+  pointer-events: none;
+  transition: left .32s var(--ease), width .32s var(--ease);
+}
+
+/* Glow burst fired by JS when switching */
+.deck-tabs.is-switching::before{
+  animation: pillGlow .6s var(--ease) forwards;
 }
 
 .deck-tab{
@@ -197,20 +216,32 @@ html, body{
   min-width: 80px;
   border-radius: 100px;
   cursor: pointer;
-  transition: background .22s var(--ease), color .22s var(--ease);
+  position: relative;
+  z-index: 1;
+  transition: color .2s var(--ease), transform .12s var(--ease);
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   white-space: nowrap;
 }
+
+/* Active: text pops, pill (::before) handles background */
 .deck-tab.is-active{
-  background: var(--gold);
   color: #0b0e12;
+  animation: tabPop .38s var(--ease);
 }
-.deck-tab:hover:not(.is-active){
-  color: rgba(255,255,255,.72);
+
+.deck-tab:hover:not(.is-active):not(:disabled){
+  color: rgba(255,255,255,.82);
 }
+
+/* Physical press feel */
+.deck-tab:active:not(:disabled){
+  transform: scale(0.9);
+  transition-duration: .06s;
+}
+
 .deck-tab:focus-visible{
   outline: 2px solid var(--gold);
   outline-offset: 2px;
@@ -218,4 +249,29 @@ html, body{
 .deck-tab:disabled{
   opacity: .4;
   cursor: default;
+}
+
+/* ── Animations ── */
+@keyframes navEnter{
+  from{ opacity:0; transform: translateX(-50%) translateY(12px); }
+  to  { opacity:1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes pillGlow{
+  0%  { box-shadow: 0 0 0 0 rgba(152,203,255,.6); }
+  40% { box-shadow: 0 0 22px 6px rgba(152,203,255,.28); }
+  100%{ box-shadow: 0 0 4px 0 rgba(152,203,255,.0); }
+}
+
+@keyframes tabPop{
+  0%  { transform: scale(1); }
+  40% { transform: scale(1.09); }
+  100%{ transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .deck-tabs          { animation: none; }
+  .deck-tabs::before  { transition: none; }
+  .deck-tab.is-active { animation: none; }
+  .deck-tabs.is-switching::before{ animation: none; }
 }

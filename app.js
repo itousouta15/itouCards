@@ -5,6 +5,7 @@ const faceFront = document.getElementById("faceFront");
 const faceBack  = document.getElementById("faceBack");
 const srStatus  = document.getElementById("srStatus");
 const tabEls    = Array.from(document.querySelectorAll(".deck-tab"));
+const deckNav   = document.querySelector(".deck-tabs");
 
 const DECKS = {
   scaict:   { front: "./img/SCAICT/1.webp",  back: "./img/SCAICT/2.webp",  label: "SCAICT 名片" },
@@ -59,6 +60,17 @@ function setActiveTab(key) {
     t.setAttribute("aria-selected", String(active));
     t.tabIndex = active ? 0 : -1;
   });
+  requestAnimationFrame(updateIndicator);
+}
+
+function updateIndicator() {
+  if (!deckNav) return;
+  const active = tabEls.find(t => t.classList.contains("is-active"));
+  if (!active) return;
+  const nr = deckNav.getBoundingClientRect();
+  const tr = active.getBoundingClientRect();
+  deckNav.style.setProperty("--pill-x", `${tr.left - nr.left}px`);
+  deckNav.style.setProperty("--pill-w", `${tr.width}px`);
 }
 
 async function switchDeck(key) {
@@ -66,7 +78,12 @@ async function switchDeck(key) {
   currentDeck = key;
   setActiveTab(key);
 
-  // Unflip instantly without waiting for animation
+  // Glow burst on the sliding pill
+  deckNav.classList.remove("is-switching");
+  void deckNav.offsetWidth; // force reflow so animation restarts
+  deckNav.classList.add("is-switching");
+  setTimeout(() => deckNav.classList.remove("is-switching"), 620);
+
   cardFlip.classList.remove("is-flipped");
   hasCard = false;
   cancelTiltLoop();
@@ -307,4 +324,6 @@ function applyZoom() {
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 setActiveTab(currentDeck);
+requestAnimationFrame(updateIndicator);
 loadDeck(DECKS[currentDeck]);
+window.addEventListener("resize", updateIndicator, { passive: true });
