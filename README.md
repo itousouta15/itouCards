@@ -1,15 +1,8 @@
 # itouCards
 
-一個用純 HTML / CSS / JavaScript 製作的卡片展示頁，會從本機載入兩張 WEBP 圖片並以 3D 卡片形式呈現。
+![image](web.webp)
 
-## 功能
-
-- 自動載入 `img/1.webp` 與 `img/2.webp`
-- 卡片正反面翻轉
-- 滑鼠移動時的 3D 傾斜效果
-- 滾輪縮放卡片大小
-- 鍵盤操作支援
-- 相容偏好減少動畫設定
+一個用純 HTML / CSS / JavaScript 製作的名片展示頁
 
 ## 檔案結構
 
