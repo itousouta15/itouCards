@@ -6,6 +6,7 @@ const faceBack  = document.getElementById("faceBack");
 const srStatus  = document.getElementById("srStatus");
 const tabEls    = Array.from(document.querySelectorAll(".deck-tab"));
 const deckNav   = document.querySelector(".deck-tabs");
+const loaderOverlay = document.getElementById("loaderOverlay");
 
 const DECKS = {
   scaict:   { front: "./img/SCAICT/1.webp",  back: "./img/SCAICT/2.webp",  label: "SCAICT 名片" },
@@ -126,6 +127,10 @@ async function loadDeck(deck) {
     stage.classList.remove("is-loading");
     tabEls.forEach((t) => (t.disabled = false));
     isBusy = false;
+    if (loaderOverlay && !loaderOverlay.classList.contains("is-done")) {
+      loaderOverlay.classList.add("is-done");
+      loaderOverlay.addEventListener("transitionend", () => loaderOverlay.remove(), { once: true });
+    }
   }
 }
 

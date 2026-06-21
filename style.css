@@ -275,3 +275,33 @@ html, body{
   .deck-tab.is-active { animation: none; }
   .deck-tabs.is-switching::before{ animation: none; }
 }
+
+/* ── Page loader ── */
+.loader-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .6s var(--ease);
+}
+.loader-overlay.is-done{
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-ring{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(152,203,255,.15);
+  border-top-color: var(--gold);
+  animation: loaderSpin .75s linear infinite;
+}
+@keyframes loaderSpin{
+  to{ transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce){
+  .loader-ring{ animation: none; opacity: .5; }
+}
